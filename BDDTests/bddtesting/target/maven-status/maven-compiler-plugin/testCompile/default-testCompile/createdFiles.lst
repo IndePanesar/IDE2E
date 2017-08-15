@@ -1,0 +1,5 @@
+com\panesaris\bdd\GOV_DVLA_ConfirmVehicle_Page.class
+com\panesaris\bdd\BDDStepDefinitions.class
+com\panesaris\bdd\GOV_DVLA_ViewVehicle_Page.class
+com\panesaris\bdd\GOV_DVLA_GetInformation_Page.class
+com\panesaris\bdd\GOV_DVLA_VehicleQuery_Page.class

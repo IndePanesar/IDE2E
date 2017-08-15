@@ -1,0 +1,144 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.panesaris.bdd</groupId>
+  <artifactId>bddtesting</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>bddtesting</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- Dependency versions -->
+    <selenium.version>2.52.0</selenium.version>
+    <!-- Configurable variables -->
+    <browser>chrome</browser>
+    <!--
+    <browser>chrome</browser>
+    <browser>phantomjs</browser>
+    <browser>ie</browser>
+    <browser>firefox</browser>
+    <browser>opera</browser>
+    -->
+    <overwrite.binaries>true</overwrite.binaries>
+
+  </properties>
+  <build>
+    <plugins>
+
+      <!-- Download required binaries to repositories -->
+      <plugin>
+        <groupId>com.lazerycode.selenium</groupId>
+        <artifactId>driver-binary-downloader-maven-plugin</artifactId>
+        <version>1.0.7</version>
+        <configuration>
+          <rootStandaloneServerDirectory>
+            ${project.basedir}/src/test/resources/selenium_standalone_binaries
+          </rootStandaloneServerDirectory>
+          <downloadedZipFileDirectory>
+            ${project.basedir}/src/test/resources/selenium_standalone_zips
+          </downloadedZipFileDirectory>
+          <customRepositoryMap>
+            ${project.basedir}/src/test/resources/RepositoryMap.xml
+          </customRepositoryMap>
+          <overwriteFilesThatExist>
+            ${overwrite.binaries}
+          </overwriteFilesThatExist>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>selenium</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Maven fail safe -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.17</version>
+        <configuration>
+          <parallel>methods</parallel>
+        <!--  <threadCount>${threads}</threadCount>-->
+          <systemPropertyVariables>
+            <browser>${browser}</browser>
+            <!-- Set properties passed in by the driver binary downloader
+            <phantomjs.binary.path>${phantomjs.binary.path}</phantomjs.binary.path>
+            <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
+            <webdriver.ie.driver>${webdriver.ie.driver}</webdriver.ie.driver>
+            <webdriver.opera.driver>${webdriver.opera.driver}</webdriver.opera.driver>
+            -->
+          </systemPropertyVariables>
+          <includes>
+            <include>
+              **/*WD.java
+            </include>
+          </includes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>1.2.4</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-core -->
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-core</artifactId>
+      <version>1.2.5</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-java -->
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>1.2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.9.6</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/info.cukes/gherkin -->
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>gherkin</artifactId>
+      <version>2.12.2</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core -->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <version>1.3</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server-standalone -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>2.45.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+    </dependency>
+  </dependencies>
+</project>

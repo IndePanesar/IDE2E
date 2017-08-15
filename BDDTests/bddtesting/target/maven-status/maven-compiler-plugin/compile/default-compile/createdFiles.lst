@@ -1,0 +1,4 @@
+com\panesaris\bdd\DriverTypesEnum.class
+com\panesaris\bdd\TestRunner.class
+com\panesaris\bdd\DriverInstance.class
+com\panesaris\bdd\WebDriverThread.class
