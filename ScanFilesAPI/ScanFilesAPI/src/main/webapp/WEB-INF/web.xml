@@ -1,0 +1,17 @@
+<!DOCTYPE web-app PUBLIC
+                "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+                "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app>
+  <display-name>Inde Panesar Scan files web service layer</display-name>
+
+  <!-- Declare the ScanForFiles.java as a servlet -->
+  <servlet>
+    <servlet-name>ScanForFiles</servlet-name>
+    <servlet-class>com.panesaris.ScanForFiles</servlet-class>
+  </servlet>
+  <!-- Map the url /scan to the servlet -->
+  <servlet-mapping>
+    <servlet-name>ScanForFiles</servlet-name>
+    <url-pattern>/scan</url-pattern>
+  </servlet-mapping>
+</web-app>
